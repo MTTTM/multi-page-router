@@ -48,5 +48,9 @@
     "rollup-plugin-uglify": "^4.0.0",
     "rollup-watch": "^4.3.1",
     "transform-runtime": "0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MTTTM/multi-page-router"
   }
 }
