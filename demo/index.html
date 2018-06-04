@@ -20,50 +20,52 @@
 	<a href="javascript:;" id="path_succes">跳转百度，成功</a>
 	<a href="./C.html?name=meisi" id="checkCurr_error">去C页面检测query是否匹配，结果不匹配</a>
 	<a href="./C.html?name=meisi&id=200" id="checkCurr_success">去C页面检测query是否匹配，结果匹配</a>
+
+	<script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.js"></script>
 	<script src="../dist/index.js"></script>
 	<script>
 		var rootPath = "/demo"
 		var rmap = {
 			index: {
-				path: rootPath + "/",//html文件地址,默认是index.tml
+				path: "",//html文件地址,默认是index.tml
 			},
 			pageA: {
-				path: rootPath + "/A.html",//html文件地址
+				path: "A.html",//html文件地址
 				query: {
 					name: "",
 					id: ""
 				}
 			},
 			pageC: {
-				path: rootPath + "/C.html",
+				path: "C.html",
 				query: {
 					name: "",
 					id: ""
 				}
 			}
 		};
-		var $Router = new $Router.Router(rmap);
+		var Router = new $Router.Router(rmap);
 		var $ = function (id) {
 			return document.getElementById(id);
 		}
 		$("a_push_err").onclick = function () {
-			$Router.push({ "name": "pageA", query: { name: "meisi" } })
+			Router.push({ "name": "pageA", query: { name: "meisi" } })
 		}
 		$("a_push_succes").onclick = function () {
-			$Router.push({ "name": "pageA", query: { name: "meisi", id: 100 } })
+			Router.push({ "name": "pageA", query: { name: "meisi", id: 100 } })
 		}
 		$("a_replace_success").onclick = function () {
-			$Router.replace({ "name": "pageA", query: { name: "meisi", id: 100 } })
+			Router.replace({ "name": "pageA", query: { name: "meisi", id: 100 } })
 		}
 		$("a_replace_error").onclick = function () {
-			$Router.replace({ "name": "pageA", query: { name: "meisi" } })
+			Router.replace({ "name": "pageA", query: { name: "meisi" } })
 		}
 
 		$("path_error").onclick = function () {
-			$Router.push({ path: "baidu.com"})
+			Router.push({ path: "baidu.com" })
 		}
-        $("path_succes").onclick = function () {
-			$Router.push({ path: "https://baidu.com"})
+		$("path_succes").onclick = function () {
+			Router.push({ path: "https://baidu.com" })
 		}
 	</script>
 </body>

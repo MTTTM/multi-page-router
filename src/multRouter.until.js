@@ -5,20 +5,21 @@ export const hrefMaker = function (obj) {
     //第三方跳转
     if(obj.path&&isVaildPath(obj)){
         return obj.path;
-    }
+    };
     let tmpQuery = "";
     //遍历对应的路由query   
     for (let [key, value] of Object.entries(this.querytoJson())) {
         if (!obj["query"][key]) {
             tmpQuery == "" ? (tmpQuery += `${key}=${value}`) : (tmpQuery += `&${key}=${value}`);
         }
-    }
+    };
     //遍历调用push或者replace的query
     for (let [key, value] of Object.entries(obj.query)) {
         tmpQuery == "" ? (tmpQuery += `${key}=${value}`) : (tmpQuery += `&${key}=${value}`);
-    }
+    };
     tmpQuery == "" ? (tmpQuery = "?" + tmpQuery) : "";
-    return obj.path ? (`${obj.path}/${tmpQuery}`) : (`${location.origin}/${this.router[obj.name]["path"]}?${tmpQuery}`);
+    let origin_ie=location.protocol+"//"+location.host+location.pathname;//fix IE  no supper  locaiton.origin_ie
+    return obj.path ? (`${obj.path}/${tmpQuery}`) : (`${origin_ie}${this.router[obj.name]["path"]}?${tmpQuery}`);
 }
 
 export const isVaildPath = function (obj) {
@@ -99,6 +100,7 @@ export const jump = function (obj, type, isTest) {
             return hrefMaker.bind(this)(obj);
         }
         window.location = hrefMaker.bind(this)(obj);
+      // hrefMaker.bind(this)(obj)
     }
     else if (type = "replace" && check.bind(this)(obj, type)) {
         if (isTest) {
