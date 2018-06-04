@@ -43,6 +43,11 @@
 ```
 ##  Usage
 
+```html
+  <!--- If you need to point to Internet explorer, you should add it-->
+   <script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.js"></script>
+```
+
 ```javascript
   import {Router} from "../../src/multRouter.class.js";
   import Maps from "../../src/router.js";
