@@ -50,6 +50,7 @@
 
 ```
 
+
  ```javascript 
   
 //window.location.href="target",it will be error,becasue it's query no include id
@@ -82,10 +83,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 ```
 
  ```javascript
-//check browser location.search,if invaild,callback params lackKey will include some query that you miss;
-$Router.checkLocation((routerQueryConfig, routerKey, lackKey)=>{
-        console.log(`当前页面路由${routerKey}缺少指定query:${lackKey.join(",")},它应该包含内容${JSON.stringify(routerQueryConfig)}`)
-})
+//check browser location.search
+ //当前页面检测
+        var checkLocation = $Router.checkLocation();
+        if (checkLocation.miss.length) {
+            // return {maps:routerQueryConfig, routerName:routerKey, miss:lackKey}
+            console.log(`当前页面路由${checkLocation.routerName}缺少指定query:${checkLocation.miss.join(",")},它应该包含内容${JSON.stringify(checkLocation.routerQueryConfig)}`)
+        }
 ```
 ```javascript
 //get location.search  query "name
@@ -103,3 +107,9 @@ $Router.querytoJson()
 $Router.disabledBack()
 
 ```
+
+# example
+
+> * The sample code is under the demo directory
+> * You must open a server instead of opening it directly in the browser
+> *  Advise you to  use  'anywhere -p 996'  on  root directory;

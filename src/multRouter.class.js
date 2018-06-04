@@ -43,9 +43,7 @@ export  class Router {
         // console.log("checkbefore::",filterRouter,"||",this.querytoJson(),location.pathname)
         //如果当前location.search和路由的不匹配，就返回回调函数
       //  console.log("本地query安全检测：", this.querytoJson(), filterRouterKey, filterRouter)
-        checkQueryByRouter.bind(this)(this.querytoJson(), filterRouter, filterRouterKey, (obj, key, lackKey) => {
-            if (typeof checkFailCallback == "function") { checkFailCallback(obj, key, lackKey) }
-        });
+        return checkQueryByRouter.bind(this)(this.querytoJson(), filterRouter, filterRouterKey);
     };
     //获取指定query
     query(name) {

@@ -1,11 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+		a {
+			display: block;
+		}
+	</style>
 </head>
+
 <body>
+	<a href="javascript:;" id="a_push_err">跳转A，会报错</a>
+	<a href="javascript:;" id="a_push_succes">跳转A，成功</a>
+	<a href="javascript:;" id="a_replace_success">替换当前为A，成功</a>
+	<a href="javascript:;" id="a_replace_error">替换当前为A，失败</a>
+	<a href="javascript:;" id="path_error">跳转百度，错误</a>
+	<a href="javascript:;" id="path_succes">跳转百度，成功</a>
+	<a href="./C.html?name=meisi" id="checkCurr_error">去C页面检测query是否匹配，结果不匹配</a>
+	<a href="./C.html?name=meisi&id=200" id="checkCurr_success">去C页面检测query是否匹配，结果匹配</a>
 	<script src="../dist/index.js"></script>
-	
+	<script>
+		var rootPath = "/demo"
+		var rmap = {
+			index: {
+				path: rootPath + "/",//html文件地址,默认是index.tml
+			},
+			pageA: {
+				path: rootPath + "/A.html",//html文件地址
+				query: {
+					name: "",
+					id: ""
+				}
+			},
+			pageC: {
+				path: rootPath + "/C.html",
+				query: {
+					name: "",
+					id: ""
+				}
+			}
+		};
+		var $Router = new $Router.Router(rmap);
+		var $ = function (id) {
+			return document.getElementById(id);
+		}
+		$("a_push_err").onclick = function () {
+			$Router.push({ "name": "pageA", query: { name: "meisi" } })
+		}
+		$("a_push_succes").onclick = function () {
+			$Router.push({ "name": "pageA", query: { name: "meisi", id: 100 } })
+		}
+		$("a_replace_success").onclick = function () {
+			$Router.replace({ "name": "pageA", query: { name: "meisi", id: 100 } })
+		}
+		$("a_replace_error").onclick = function () {
+			$Router.replace({ "name": "pageA", query: { name: "meisi" } })
+		}
+
+		$("path_error").onclick = function () {
+			$Router.push({ path: "baidu.com"})
+		}
+        $("path_succes").onclick = function () {
+			$Router.push({ path: "https://baidu.com"})
+		}
+	</script>
 </body>
+
 </html>

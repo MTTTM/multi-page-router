@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>C.html</h1>
+    <script src="../dist/index.js"></script>
+    <script>
+        var rootPath = "/demo"
+        var rmap = {
+            index: {
+                path: rootPath + "/",//html文件地址,默认是index.tml
+            },
+            pageA: {
+                path: rootPath + "/A.html",//html文件地址
+                query: {
+                    name: "",
+                    id: ""
+                }
+            },
+            pageC: {
+                path: rootPath + "/C.html",
+                query: {
+                    name: "",
+                    id: ""
+                }
+            }
+        };
+        var $Router = new $Router.Router(rmap);
+        //当前页面检测
+        var checkLocation = $Router.checkLocation();
+        console.log("checkLocation", checkLocation)
+        if (checkLocation.miss.length) {
+            // return {maps:routerQueryConfig, routerName:routerKey, miss:lackKey}
+            console.log(`当前页面路由${checkLocation.routerName}缺少指定query:${checkLocation.miss.join(",")},它应该包含内容${JSON.stringify(checkLocation.routerQueryConfig)}`)
+        }
+    </script>
+</body>
+
+</html>
