@@ -11,20 +11,20 @@
 > * Browser address resolution tool
 > * Multiple page router
 
-# Router.config  
+## Router.config  
 
 ```javascript
 //router.js
    const rmap ={
 	index: {
-        path: "/",//html文件地址,默认是index.tml
+        path: "/",//default  file  is index.tml
         query: {
             name: "",
             id: ""
         }
     },
     pageA: {
-        path: "/pageA.html",//html文件地址
+        path: "/pageA.html",
         query: {
             name: "",
             id: ""
@@ -41,25 +41,50 @@
  export default rmap;
 
 ```
+## methods
+
+|    name       | isStatic |  params        | warn                |
+| ----------    | ---      |   ---          | ---                 |
+| go            |  true    |   number       |                     |
+| push          |  false   |   object       |                     |
+| replace       |  false   |   object       |                     |
+| checkLocation |  false   |     --         |                     |
+| query         |  true    | string or --   |                     |
+| querytoJson   |  true    |   string or -- |                     |
+| disabledBack  |  true    |       --       |  no suppert IE10    |  
+
 ##  Usage
+
+### support  Internet explorer
 
 ```html
   <!--- If you need to point to Internet explorer, you should add it-->
    <script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.js"></script>
 ```
 
+### import  or  require
 ```javascript
-  //import  Router from "./R.js";
+  //import  Router from "multi-page-router";
   let Router=require("multi-page-router");
   import Maps from "multi-page-router";
-   window.$Router = new Router(Maps);
+  let $Router = new Router(Maps);
 
 ```
 
+### include  by  html tag script 
+```
+<script src="file"></script>
+<script>
+  var $Router=new Router({...});
+</script>
+```
+
+## method usage
+
+### push
 
  ```javascript 
-  
-//window.location.href="target",it will be error,becasue it's query no include id
+//it will be error,becasue it's query no include id
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelector("[name=pageA]").onclick=function(){
     $Router.push({"name":"pageA",query:{}})
@@ -68,8 +93,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 ```
 
+
  ```javascript
-//it success
+//it will be success
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelector("[name=pageD]").onclick=function(){
     $Router.push({"name":"pageC",query:{name:"100",id:120}})
@@ -77,6 +103,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 }, false);
 
 ```
+### replace
 
  ```javascript
 //window.location.replace("target")
@@ -87,30 +114,38 @@ document.addEventListener("DOMContentLoaded",()=>{
 }, false);
 
 ```
-
+### checkLocation
  ```javascript
 //check browser location.search
  //当前页面检测
         var checkLocation = $Router.checkLocation();
         if (checkLocation.miss.length) {
-            // return {maps:routerQueryConfig, routerName:routerKey, miss:lackKey}
             console.log(`当前页面路由${checkLocation.routerName}缺少指定query:${checkLocation.miss.join(",")},它应该包含内容${JSON.stringify(checkLocation.routerQueryConfig)}`)
         }
 ```
+### Router.query
+
 ```javascript
 //get location.search  query "name
 $Router.query("name")
 
 ```
+### Router.querytoJson()
+
 ```javascript
 //get location.search and format to json
-$Router.querytoJson()
+Router.querytoJson()
 
 ```
+```javascript
+//get location.search and format to json
+Router.querytoJson("https://www.google.com.hk/?gfe_rd=cr&ei=G3O7VI7JFtbF0ASc54DoAQ")
+```
+### Router.disabledBack()
 
 ```javascript
 //disabled  history back
-$Router.disabledBack()
+Router.disabledBack()
 
 ```
 

@@ -8,8 +8,8 @@ export default class Router {
             throw { msg: "路由不是对象类型", type: "mapNoObject" }
         }
     }
-    go(number) {
-        if (number > 0) {
+     static go(number) {
+        if (number <0) {
             history.back(number); //如果是0刷新当前，如果是大于0前进，如果小于0后退
         } else {
             window.history.go(number)
@@ -29,7 +29,7 @@ export default class Router {
             @arguments key {string} 缺失的query对应的key
        isTest {true}  是否测试环境
     */
-    checkLocation(checkFailCallback, isTest) {
+    checkLocation() {
         let filterRouter;
         let filterRouterKey;
         //获取命中的query和对应的路由的key
