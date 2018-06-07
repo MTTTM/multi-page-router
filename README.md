@@ -8,8 +8,8 @@
 
 ## About
 
-> Browser address resolution tool
-> Multiple page router
+> * Browser address resolution tool
+> * Multiple page router
 
 # Router.config  
 
@@ -49,8 +49,9 @@
 ```
 
 ```javascript
-  import {Router} from "../../src/multRouter.class.js";
-  import Maps from "../../src/router.js";
+  //import  Router from "./R.js";
+  let Router=require("multi-page-router");
+  import Maps from "multi-page-router";
    window.$Router = new Router(Maps);
 
 ```

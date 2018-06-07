@@ -8,32 +8,32 @@ const clean = require('gulp-clean');
 
 const uglify= require('rollup-plugin-uglify');
 const es3ify=require('rollup-plugin-es3ify');//解决IE8中编译后 export，try catch 里面包含的IE8浏览器关键字导致的，“无法识别标识”错误
-console.log("uglifyuglifyuglify",uglify)
+const  minify =require('uglify-js').minify; 
 //输入&&输出配置
 const input = { input: 'src/multRouter.class.js' };
 const sourcemap=process.env.NODE_ENV === 'production'?true:false;
-console.log("process.env.NODE_ENV:",sourcemap)
 const output = {
     file: 'dist/index.js',
     format: 'umd',
     sourcemap: false,
-    name: '$Router' //把router挂在window.Router下面
-
+    name: 'Router', //把router挂在global.Router下面
+   // intro  : 'window&&(window.$Router =Router)'  //吧内容挂在window下面
 };
 
 gulp.task('build',["clean"], async  () => {
    const bundle = await rollup.rollup({
         ...input,
+        context:"widnow",
     plugins: [
-        resolve({
-            modulesOnly: true
-        }),
-        , (process.env.NODE_ENV === 'production' && uglify.uglify()),
         es3ify(),
+        resolve({
+            module: true
+        }),
         babel({
             exclude: 'node_modules/**' // only transpile our source code
-        })
-     
+        }),
+        , (process.env.NODE_ENV === 'production' && uglify.uglify()), 
+       
     ]
     })
    await bundle.write(output);

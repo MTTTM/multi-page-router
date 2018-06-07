@@ -8,6 +8,12 @@
         ]
     ],
     "plugins": [
-        "external-helpers"
+        "external-helpers",
+        [
+            "transform-es2015-classes",
+            {
+                "loose": true
+            }
+        ]
     ]
 }
