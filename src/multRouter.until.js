@@ -8,7 +8,7 @@ export const hrefMaker = function (obj) {
     };
     let tmpQuery = "";
     //遍历对应的路由query   
-    for (let [key, value] of Object.entries(this.querytoJson())) {
+    for (let [key, value] of Object.entries($Router.querytoJson())) {
         if (!obj["query"][key]) {
             tmpQuery == "" ? (tmpQuery += `${key}=${value}`) : (tmpQuery += `&${key}=${value}`);
         }
@@ -70,13 +70,15 @@ export const check = function (obj, type) {
     **  routerKey  {string}  命中路由的key
     **  lackKey {Array} 缺少的query key
     */
-export const checkQueryByRouter = function (targetQuery, routerQueryConfig, routerKey, callback) {
+export const checkQueryByRouter = function (targetQuery, routerQueryConfig, routerKey) {
     //console.log(targetQuery, routerQueryConfig, callback)
     let lackKey = [];
+    console.log("routerQueryConfig,routerQueryConfig",routerQueryConfig)
     if (routerQueryConfig) {
         for (let [key, value] of Object.entries(routerQueryConfig)) {
             //  console.log("targetQuery[key]", targetQuery[key], key, ":::", this.query.bind(this)(key))
-            if (!(targetQuery[key] || this.query.bind(this)(key))) {
+            console.log("targetQuery[key]:",targetQuery[key])
+            if (!(targetQuery[key] || $Router.query(key))) {
                 lackKey.push(key);
             };
         }

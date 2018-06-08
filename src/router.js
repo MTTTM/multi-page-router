@@ -1,7 +1,7 @@
 //import {Router} from "./multRouter.class.js";
 
 
-const rmap ={
+export const rmap ={
 	index: {
         path: "/",//html文件地址,默认是index.tml
         query: {
@@ -24,5 +24,4 @@ const rmap ={
         }
     }
 };
-// window.Router = new Router(rmap);
- export default rmap;
+ export const root="/demo"

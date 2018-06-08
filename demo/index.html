@@ -44,13 +44,14 @@
 				}
 			}
 		};
-		var Router = new $Router.Router(rmap);
+		var Router = new $Router("/demo",rmap);
 		var $ = function (id) {
 			return document.getElementById(id);
 		}
 		$("a_push_err").onclick = function () {
 			Router.push({ "name": "pageA", query: { name: "meisi" } })
 		}
+		console.log("Router.query",$Router.query)
 		$("a_push_succes").onclick = function () {
 			Router.push({ "name": "pageA", query: { name: "meisi", id: 100 } })
 		}

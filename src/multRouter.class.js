@@ -1,13 +1,14 @@
 import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until"
-export default class Router {
-    constructor(router) {
+ class $Router {
+    constructor(root,router) {
         if (Object.prototype.toString.call(router) === "[object Object]") {
             this.router = router;
-            this.bowserSearch = window.location.search;
+            this.root=root?root:"";
         } else {
             throw { msg: "路由不是对象类型", type: "mapNoObject" }
         }
     }
+     static  bowserSearch=window.location.search;
      static go(number) {
         if (number <0) {
             history.back(number); //如果是0刷新当前，如果是大于0前进，如果小于0后退
@@ -34,7 +35,8 @@ export default class Router {
         let filterRouterKey;
         //获取命中的query和对应的路由的key
         for (let [key, value] of Object.entries(this.router)) {
-            if (this.router[key]["path"] == location.pathname) {
+            console.log("root::",this.root+this.router[key]["path"],"location.pathname::",location.pathname)
+            if (this.root+this.router[key]["path"] ==location.pathname) {
                 filterRouter = this.router[key]["query"];
                 filterRouterKey = key;
                 break;
@@ -43,7 +45,7 @@ export default class Router {
         // console.log("checkbefore::",filterRouter,"||",this.querytoJson(),location.pathname)
         //如果当前location.search和路由的不匹配，就返回回调函数
         //  console.log("本地query安全检测：", this.querytoJson(), filterRouterKey, filterRouter)
-        return checkQueryByRouter.bind(this)(this.querytoJson(), filterRouter, filterRouterKey);
+        return checkQueryByRouter.bind(this)($Router.querytoJson(), filterRouter, filterRouterKey);
     };
     //获取指定query
     /*
@@ -52,8 +54,8 @@ export default class Router {
     */
     static query(name, bowserSearch) {
         let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        let bowserSearchString = bowserSearch ? bowserSearch : window.location.search;
-        let r = this.bowserSearchString.substr(1).match(reg);
+        let bowserSearchString = bowserSearch ? bowserSearch : $Router.bowserSearch;
+        let r = bowserSearchString.substr(1).match(reg);
         //对浏览器encode后的中文或特殊代码进行反编译
         if (r != null) return decodeURIComponent(r[2]);
         return null;
@@ -84,4 +86,6 @@ export default class Router {
     }
 
 };
+// $Router.bowserSearch=window.location.search
 
+export default $Router;

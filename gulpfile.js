@@ -16,7 +16,7 @@ const output = {
     file: 'dist/index.js',
     format: 'umd',
     sourcemap: false,
-    name: 'Router', //把router挂在global.Router下面
+    name: '$Router', //把router挂在global.Router下面
    // intro  : 'window&&(window.$Router =Router)'  //吧内容挂在window下面
 };
 

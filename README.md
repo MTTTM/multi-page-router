@@ -11,7 +11,10 @@
 > * Browser address resolution tool
 > * Multiple page router
 
-## Router.config  
+## Router.config
+
+> * If you only use static method, you don't need to use it
+> * Only use multi-page routing, you need it
 
 ```javascript
 //router.js
@@ -43,15 +46,15 @@
 ```
 ## methods
 
-|    name       | isStatic |  params        | warn                |
-| ----------    | ---      |   ---          | ---                 |
-| go            |  true    |   number       |                     |
-| push          |  false   |   object       |                     |
-| replace       |  false   |   object       |                     |
-| checkLocation |  false   |     --         |                     |
-| query         |  true    | string or --   |                     |
-| querytoJson   |  true    |   string or -- |                     |
-| disabledBack  |  true    |       --       |  no suppert IE10    |  
+|    name       | isStatic |  paramsType        | warn            | Usage|
+| ----------    | ---      |   ---          | ---                 | ---|
+| go            |  true    |   number       |                     | like:$Router.go(-1) or $Router.go(2)  |
+| push          |  false   |   object       |                     | new $Router(Maps).push|
+| replace       |  false   |   object       |                     | new $Router(Maps).replace|
+| checkLocation |  false   |     --         |                     | new $Router(Maps).checkLocation|
+| query         |  true    | string or --   |                     | $Router.query("name")|
+| querytoJson   |  true    |   string or -- |                     | $Router.querytoJson()  or  $Router.querytoJson("url")|
+| disabledBack  |  true    |       --       |  no suppert IE10    |  $Router.disabledBack() |
 
 ##  Usage
 
@@ -64,10 +67,11 @@
 
 ### import  or  require
 ```javascript
-  //import  Router from "multi-page-router";
-  let Router=require("multi-page-router");
+  //import  $Router from "multi-page-router";
+  let $Router=require("multi-page-router");
   import Maps from "multi-page-router";
-  let $Router = new Router(Maps);
+  let root="/demo/"; //your project root path
+  let Router = new $Router(root,Maps);
 
 ```
 
@@ -75,7 +79,7 @@
 ```
 <script src="file"></script>
 <script>
-  var $Router=new Router({...});
+  var Router=new $Router("/root/",{...Maps});
 </script>
 ```
 
@@ -87,7 +91,7 @@
 //it will be error,becasue it's query no include id
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelector("[name=pageA]").onclick=function(){
-    $Router.push({"name":"pageA",query:{}})
+    Router.push({"name":"pageA",query:{}})
   }
 }, false);
 
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 //it will be success
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelector("[name=pageD]").onclick=function(){
-    $Router.push({"name":"pageC",query:{name:"100",id:120}})
+    Router.push({"name":"pageC",query:{name:"100",id:120}})
   }
 }, false);
 
@@ -109,7 +113,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 //window.location.replace("target")
 document.addEventListener("DOMContentLoaded",()=>{
   document.querySelector("[name=pageC]").onclick=function(){
-    $Router.replace({"name":"pageC",query:{name:"100",id:120}})
+    Router.replace({"name":"pageC",query:{name:"100",id:120}})
   }
 }, false);
 
@@ -118,34 +122,34 @@ document.addEventListener("DOMContentLoaded",()=>{
  ```javascript
 //check browser location.search
  //当前页面检测
-        var checkLocation = $Router.checkLocation();
+        var checkLocation = Router.checkLocation();
         if (checkLocation.miss.length) {
             console.log(`当前页面路由${checkLocation.routerName}缺少指定query:${checkLocation.miss.join(",")},它应该包含内容${JSON.stringify(checkLocation.routerQueryConfig)}`)
         }
 ```
-### Router.query
+### $Router.query
 
 ```javascript
 //get location.search  query "name
 $Router.query("name")
 
 ```
-### Router.querytoJson()
+### $Router.querytoJson()
 
 ```javascript
 //get location.search and format to json
-Router.querytoJson()
+$Router.querytoJson()
 
 ```
 ```javascript
 //get location.search and format to json
-Router.querytoJson("https://www.google.com.hk/?gfe_rd=cr&ei=G3O7VI7JFtbF0ASc54DoAQ")
+$Router.querytoJson("https://www.google.com.hk/?gfe_rd=cr&ei=G3O7VI7JFtbF0ASc54DoAQ")
 ```
-### Router.disabledBack()
+### $Router.disabledBack()
 
 ```javascript
 //disabled  history back
-Router.disabledBack()
+$Router.disabledBack()
 
 ```
 
