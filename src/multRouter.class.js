@@ -1,4 +1,20 @@
 import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until"
+
+/* @flow */
+function multiple10 (num) {
+    return num * 10
+  }
+  
+  multiple10('20')
+  
+  function getLength (str) {
+    return str.length
+  }
+  getLength('3')
+  getLength([1,2,3])
+  
+
+
 class $Router {
     constructor(root, router) {
         if (Object.prototype.toString.call(router) === "[object Object]") {
