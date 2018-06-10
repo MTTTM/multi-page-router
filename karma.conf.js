@@ -12,10 +12,11 @@ const buble = require('rollup-plugin-buble');
 const chai = require("chai");
 const commonjs = require('rollup-plugin-commonjs');
 const istanbul = require('rollup-plugin-istanbul');
+const es3ify=require('rollup-plugin-es3ify');//解决IE8中编译后 export，try catch 里面包含的IE8浏览器关键字导致的，“无法识别标识”错误
+const multiEntry =require('rollup-plugin-multi-entry');
 
 
-
-const input = { input: 'test/unit/**/*.spec.js' };
+const input = { input: ['test/unit/**/*.spec.js','src/*.js'] };
 const output = {
   // file: 'dist/index.js',
   format: 'umd',
@@ -26,7 +27,7 @@ module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: './',
 
 
     // frameworks to use
@@ -92,14 +93,18 @@ module.exports = function (config) {
       ...input,
       output,
       plugins: [
-        resolve({ jsnext: true }),
+        es3ify(),
+        resolve({
+          module: true
+        }),
         commonjs(),
         istanbul({
           exclude: ['node_modules/**/*']
         }),
         babel({
           exclude: 'node_modules/**' // only transpile our source code
-        })
+        }),
+        multiEntry()
       ]
     }
     // ,

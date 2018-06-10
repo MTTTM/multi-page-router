@@ -1,3 +1,5 @@
+import $Router from "./multRouter.class.js";
+
 //路径生成器
 export const hrefMaker = function (obj) {
     //router.push({ name: 'register', query: { plan: 'private' }})  同域名同时路由有配置

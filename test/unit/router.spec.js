@@ -1,8 +1,8 @@
-import {Router} from "../../src/multRouter.class.js";
-import Maps from "../../src/router.js";
-window.$Router = new Router(Maps);
+import $Router from "../../src/multRouter.class";
+import {rmap,root} from "../../src/router.js";
+window.Router = new $Router(root,rmap);
 import 'chai/register-expect';
-describe("Router jump test", () => {
+describe("Router  test", () => {
     // it("push 缺少query测试:", (done) => {
     //    try{
     //     $Router.jump({ "name": "pageA", query: {} },"push","isTest")

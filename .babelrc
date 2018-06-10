@@ -5,11 +5,12 @@
             {
                 "modules": false
             }
-        ]
+        ],
+        "flow"
     ],
     "plugins": [
         "external-helpers",
-        "transform-class-properties",
+        ["transform-class-properties"],
         [
             "transform-es2015-classes",
             {

@@ -1,16 +1,16 @@
 import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until"
- class $Router {
-    constructor(root,router) {
+class $Router {
+    constructor(root, router) {
         if (Object.prototype.toString.call(router) === "[object Object]") {
             this.router = router;
-            this.root=root?root:"";
+            this.root = root ? root : "";
         } else {
             throw { msg: "路由不是对象类型", type: "mapNoObject" }
         }
     }
-     static  bowserSearch=window.location.search;
-     static go(number) {
-        if (number <0) {
+    static bowserSearch = window.location.search;
+    static go(number) {
+        if (number < 0) {
             history.back(number); //如果是0刷新当前，如果是大于0前进，如果小于0后退
         } else {
             window.history.go(number)
@@ -35,8 +35,8 @@ import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until"
         let filterRouterKey;
         //获取命中的query和对应的路由的key
         for (let [key, value] of Object.entries(this.router)) {
-            console.log("root::",this.root+this.router[key]["path"],"location.pathname::",location.pathname)
-            if (this.root+this.router[key]["path"] ==location.pathname) {
+            console.log("root::", this.root + this.router[key]["path"], "location.pathname::", location.pathname)
+            if (this.root + this.router[key]["path"] == location.pathname) {
                 filterRouter = this.router[key]["query"];
                 filterRouterKey = key;
                 break;
