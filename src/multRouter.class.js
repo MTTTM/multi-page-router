@@ -1,18 +1,12 @@
-import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until"
-
 /* @flow */
-function multiple10 (num) {
+import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until";
+function multiple10 (num:number):number {
     return num * 10
   }
   
-  multiple10('20')
+multiple10("234545fd,gv")
   
-  function getLength (str) {
-    return str.length
-  }
-  getLength('3')
-  getLength([1,2,3])
-  
+
 
 
 class $Router {

@@ -1,7 +1,8 @@
 [ignore]
 node_modules/*
 [include]
-src/*.js
+./src/**/*.js
+.history/*
 [libs]
 
 [lints]

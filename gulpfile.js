@@ -9,8 +9,9 @@ const clean = require('gulp-clean');
 const uglify= require('rollup-plugin-uglify');
 const es3ify=require('rollup-plugin-es3ify');//解决IE8中编译后 export，try catch 里面包含的IE8浏览器关键字导致的，“无法识别标识”错误
 const  minify =require('uglify-js').minify; 
+const flow = require('rollup-plugin-flow');
 //输入&&输出配置
-const input = { input: 'src/multRouter.class.js' };
+const input = { input: 'src/multRouter.class.js', plugins: [ flow() ] };
 const sourcemap=process.env.NODE_ENV === 'production'?true:false;
 const output = {
     file: 'dist/index.js',

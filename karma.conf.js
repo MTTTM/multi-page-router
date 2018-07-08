@@ -98,13 +98,14 @@ module.exports = function (config) {
           module: true
         }),
         commonjs(),
-        istanbul({
-          exclude: ['node_modules/**/*']
-        }),
+        
         babel({
           exclude: 'node_modules/**' // only transpile our source code
         }),
-        multiEntry()
+        multiEntry(),
+        istanbul({
+          exclude: ['node_modules/**/*']
+        })
       ]
     }
     // ,
