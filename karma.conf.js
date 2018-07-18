@@ -92,16 +92,19 @@ module.exports = function (config) {
     rollupPreprocessor: {
       ...input,
       output,
+    //  acornInjectPlugins: [require('acorn-static-class-property-initializer/inject')],
       plugins: [
+       
         es3ify(),
         resolve({
           module: true
         }),
-        commonjs(),
-        
         babel({
           exclude: 'node_modules/**' // only transpile our source code
         }),
+        commonjs(),
+        
+      
         multiEntry(),
         istanbul({
           exclude: ['node_modules/**/*']

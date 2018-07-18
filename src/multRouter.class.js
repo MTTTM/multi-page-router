@@ -1,14 +1,8 @@
-/* @flow */
+
 import { jump, checkQueryByRouter, check, hrefMaker } from "./multRouter.until";
-function multiple10 (num:number):number {
-    return num * 10
-  }
+
+
   
-multiple10("234545fd,gv")
-  
-
-
-
 class $Router {
     constructor(root, router) {
         if (Object.prototype.toString.call(router) === "[object Object]") {

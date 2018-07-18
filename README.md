@@ -155,6 +155,6 @@ $Router.disabledBack()
 
 # example
 
-> * The sample code is under the demo directory
+> * The  code is under the demo directory
 > * You must open a server instead of opening it directly in the browser
-> *  Advise you to  use  'anywhere -p 996'  on  root directory;
+> *  Advise you to "npm install anywhere -g" ,then use  'anywhere -p 8088'  on  root directory;run "http://localhost:8088/demo"
