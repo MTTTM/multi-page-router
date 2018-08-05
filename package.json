@@ -1,8 +1,9 @@
 {
   "name": "multi-page-router",
   "version": "1.0.2",
-  "description": "mult page router.If you use vue for mult page, you can try it;",
-  "main": "dist/index.js",
+  "description": "multi page router.If you use vue for mult page, you can try it;",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
   "scripts": {
     "test": "karma start",
     "cover": "karma run",

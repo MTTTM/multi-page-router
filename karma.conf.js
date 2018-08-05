@@ -92,7 +92,6 @@ module.exports = function (config) {
     rollupPreprocessor: {
       ...input,
       output,
-    //  acornInjectPlugins: [require('acorn-static-class-property-initializer/inject')],
       plugins: [
        
         es3ify(),

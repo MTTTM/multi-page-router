@@ -20,12 +20,14 @@ class $Router {
             window.history.go(number)
         }
     }
+
     push(obj) {
-        jump.bind(this)(obj, "push");
+        window.location = jump.bind(this)(obj, "push");
     }
 
     replace(obj) {
-        jump.bind(this)(obj, "replace");
+        //jump.bind(this)(obj, "replace");
+        location.replace(jump.bind(this)(obj, "replace"));
     }
     //对比路由配置，查看当前浏览器地址栏地址是否合法
     /*

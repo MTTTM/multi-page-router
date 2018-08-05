@@ -21,27 +21,27 @@ const output = {
     // intro  : 'window&&(window.$Router =Router)'  //吧内容挂在window下面
 };
 const outputES = {
-    file: 'dist/index.js',
+    file: 'dist/index.es.js',
     format: 'es',
     sourcemap: false,
     name: '$Router', 
 };
 gulp.task('build', ["clean"], async () => {
-    const bundle1 = await rollup.rollup({
-        ...input,
-        context: "widnow",
-        plugins: [
+    // const bundle1 = await rollup.rollup({
+    //     ...input,
+    //     context: "widnow",
+    //     plugins: [
         
-            resolve({
-                module: true
-            }),
-            babel({
-                exclude: 'node_modules/**' // only transpile our source code
-            })
+    //         resolve({
+    //             module: true
+    //         }),
+    //         babel({
+    //             exclude: 'node_modules/**' // only transpile our source code
+    //         })
 
-        ]
-    })
-    await bundle1.write(outputES);
+    //     ]
+    // })
+    // await bundle1.write(outputES);
 
 
     if (process.env.NODE_ENV == "dev") {
@@ -59,6 +59,22 @@ gulp.task('build', ["clean"], async () => {
             ]
         })
         await bundle1.write(outputES);
+        const bundle = await rollup.rollup({
+            ...input,
+            context: "widnow",
+            plugins: [
+                es3ify(),
+                resolve({
+                    module: true
+                }),
+                babel({
+                    exclude: 'node_modules/**' // only transpile our source code
+                }),
+               // , (process.env.NODE_ENV === 'production' && uglify.uglify()),
+
+            ]
+        })
+        await bundle.write(output);
     }
     else {
         const bundle = await rollup.rollup({
